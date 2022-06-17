@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./asset/fonts/fontawesome-free-5.15.3-web/fontawesome-free-5.15.3-web/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./asset/css/base.css">
+    <title>FORM</title>
+</head>
+<body>
+    <div class="main">
+        <div class = "borderForm">
+
+            <form action="" class="form" id="form-1">
+    
+                <div class="form-heading">Đăng ký thành viên</div>
+    
+                <div class="form-group">
+                    <label for="fullname" class="form-label">Tên đầy đủ:</label>
+                    <input id="fullname" type="text" name="fullname" class="input" placeholder="VD: Quang Duy">
+                    <span class="form-message"></span>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email" class="form-label">Email:</label>
+                    <input id="email" type="text" name="email" class="input" placeholder="VD: email@gmail.com">
+                    <span class="form-message"></span>
+                </div>
+    
+                <div class="form-group">
+                    <label for="password" class="form-label">Mật khẩu:</label>
+                    <input id="password" type="password" name="password" class="input" placeholder="Nhập mật khẩu">
+                    <span class="form-message"></span>
+                </div>
+    
+                <div class="form-group">
+                    <label for="password_confirmation" class="form-label">Nhập lại mật khẩu:</label>
+                    <input id="password_confirmation" type="password" name="password_confirmation" class="input" placeholder="Nhập lại mật khẩu">
+                    <span class="form-message"></span>
+                </div>
+    
+                <div class="btn">
+                    <button class="inBtn">Đăng Ký</button>
+                </div>
+            </form>
+    
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+    <script>
+        validator({
+            form: '#form-1',
+            message: '.form-message',
+            formGroupSelector: '.form-group',
+            rules: [
+                validator.isRequired('#fullname'),
+                validator.isRequired('#email'),
+                validator.isEmail('#email'),
+                validator.isRequired('#password'),
+                validator.isPassword('#password', 6),
+                validator.isRequired('#password_confirmation'),
+                validator.isPassword_confirmation('#password_confirmation', function(){
+                    return document.querySelector('#form-1 #password').value;
+                }),
+            ],
+            onSubmit: function(data){
+                // call API
+                console.log(data);
+            }
+        });
+    </script>
+</body>
+</html>
